@@ -3,7 +3,6 @@ library identifier: 'ci-pipeline-lib@main', retriever: modernSCM([
     remote: 'https://github.com/digvijay-ps/example-repo.git',
     credentialsId: 'github-digvijay-pat'
 ])
-
 pipeline {
     agent none
 
@@ -11,18 +10,30 @@ pipeline {
         nodejs 'NODE_JS'
     }
 
+    parameters {
+        string(name: 'GIT_BRANCH', defaultValue: 'main', description: 'Branch to build from')
+        booleanParam(name: 'COMPILE', defaultValue: true, description: 'Run compile step')
+        booleanParam(name: 'BUILD_DOCKER_IMAGE', defaultValue: true, description: 'Build Docker image')
+        booleanParam(name: 'PUSH_DOCKER_IMAGE', defaultValue: false, description: 'Push Docker image')
+        string(name: 'REPOSITORY_NAME', defaultValue: 'my-docker-repo', description: 'Docker repository name')
+        string(name: 'APP_NAME', defaultValue: 'my-app', description: 'Application name')
+        string(name: 'DOCKER_IMAGE_TAG', defaultValue: 'latest', description: 'Docker image tag')
+    }
+
     stages {
         stage('Checkout') {
-            agent dindPodTemplate()
+            agent { kubernetes { yaml dindPodTemplate() } }
             steps {
-                checkoutGitBranch(params.GIT_BRANCH,
-                                  'https://github.com/digvijay-ps/harnessify-ui.git',
-                                  'github-digvijay-pat')
+                checkoutGitBranch(
+                    params.GIT_BRANCH,
+                    'https://github.com/digvijay-ps/harnessify-ui.git',
+                    'github-digvijay-pat'
+                )
             }
         }
 
         stage('Compile') {
-            agent dindPodTemplate()
+            agent { kubernetes { yaml dindPodTemplate() } }
             when { expression { params.COMPILE } }
             steps {
                 container('node') {
@@ -32,7 +43,7 @@ pipeline {
         }
 
         stage('Package') {
-            agent dindPodTemplate()
+            agent { kubernetes { yaml dindPodTemplate() } }
             steps {
                 container('node') {
                     sh 'npm run build'
@@ -41,7 +52,7 @@ pipeline {
         }
 
         stage('Docker Build & Push') {
-            agent dindPodTemplate()
+            agent { kubernetes { yaml dindPodTemplate() } }
             when { expression { params.BUILD_DOCKER_IMAGE || params.PUSH_DOCKER_IMAGE } }
             steps {
                 buildAndPushDocker(
