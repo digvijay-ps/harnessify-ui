@@ -1,0 +1,7 @@
+.migration-detail-page {
+  background-color: var(--color-light); /* Off-white background */
+  min-height: 100vh;
+  padding: 80px 24px 24px; /* space below header and side padding */
+  box-sizing: border-box;
+  overflow-y: auto;
+}

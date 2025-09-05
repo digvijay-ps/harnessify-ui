@@ -1,0 +1,50 @@
+.yaml-viewer {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-light);
+  box-shadow: var(--card-shadow);
+  margin-top: 12px;
+}
+
+.yaml-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 12px;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: var(--color-white);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.copy-button:hover {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+.yaml-content {
+  margin: 0;
+  padding: 16px;
+  background-color: #fafafa;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  max-height: 500px;
+  overflow-y: auto;
+  color: #333;
+}

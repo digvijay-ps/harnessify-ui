@@ -1,0 +1,60 @@
+.header-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 20px 20px;
+  background-color: var(--color-white);
+  font-family: var(--font-heading);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.header-home-icon {
+  background: none;
+  border: none;
+  color: #ff414d;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 2px 8px;
+  transition: color 0.2s ease-in-out;
+}
+
+.header-home-icon:hover {
+  color: rgb(206, 72, 0);;
+}
+
+.header-bar-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ff414d;
+  font-family: var(--font-heading);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ps-logo img {
+  height: 8.725rem;
+  max-width: 7.5rem;
+  object-fit: contain;
+  display: block;
+  margin-top: 3px;
+}
+
+.header-bar-search {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1;
+  min-width: 200px;
+}

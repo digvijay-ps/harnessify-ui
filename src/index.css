@@ -1,0 +1,70 @@
+/* index.css */
+
+/* === Font Imports === */
+@import url('https://fonts.googleapis.com/css2?family=Futura+PT:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Minion+Pro:wght@400;700&display=swap');
+
+/* === Root Theme Variables === */
+:root {
+  --font-heading: 'Futura Next', 'Futura PT', sans-serif;
+  --font-body: 'Minion Pro', serif;
+
+  --color-white: #ffffff;
+  --color-offwhite: #f9f9f9;
+  --color-black: #111111;
+  --color-accent: #cc0000; /* Radiant Red */
+
+  --color-border: #e0e0e0;
+  --color-muted: #888888;
+
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+}
+
+/* === Global Reset & Typography === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input, textarea {
+  font-family: var(--font-body);
+  color: var(--color-black);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+}
+
+code {
+  font-family: monospace;
+  background-color: var(--color-offwhite);
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+}
