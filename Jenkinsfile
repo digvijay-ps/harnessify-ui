@@ -22,7 +22,12 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            agent { kubernetes { yaml dindPodTemplate() } }
+            agent {
+                kubernetes {
+                    yaml """${dindPodTemplate()}"""
+                }
+            }
+
             steps {
                 checkoutGitBranch(
                     params.GIT_BRANCH,
@@ -33,7 +38,12 @@ pipeline {
         }
 
         stage('Compile') {
-            agent { kubernetes { yaml dindPodTemplate() } }
+            agent {
+    kubernetes {
+        yaml """${dindPodTemplate()}"""
+    }
+}
+
             when { expression { params.COMPILE } }
             steps {
                 container('node') {
@@ -43,7 +53,12 @@ pipeline {
         }
 
         stage('Package') {
-            agent { kubernetes { yaml dindPodTemplate() } }
+           agent {
+    kubernetes {
+        yaml """${dindPodTemplate()}"""
+    }
+}
+
             steps {
                 container('node') {
                     sh 'npm run build'
@@ -52,7 +67,12 @@ pipeline {
         }
 
         stage('Docker Build & Push') {
-            agent { kubernetes { yaml dindPodTemplate() } }
+           agent {
+    kubernetes {
+        yaml """${dindPodTemplate()}"""
+    }
+}
+
             when { expression { params.BUILD_DOCKER_IMAGE || params.PUSH_DOCKER_IMAGE } }
             steps {
                 buildAndPushDocker(
