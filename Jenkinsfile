@@ -53,6 +53,25 @@ pipeline {
             }
         }
 
+        stage('Authenticate Docker to GAR') {
+            when {
+                expression { return params.PUSH_DOCKER_IMAGE }
+            }
+            steps {
+                container('docker') {
+                    withCredentials([file(credentialsId: 'gcloud-service-account', variable: 'GCP_KEY_FILE')]) {
+                        sh '''
+                            echo "[INFO] Verifying Docker Daemon..."
+                            docker info
+
+                            echo "[INFO] Authenticating Docker to GAR..."
+                            GAR_HOST=$(echo "${REPOSITORY_NAME}" | cut -d'/' -f1)
+                            cat $GCP_KEY_FILE | docker login -u _json_key --password-stdin https://$GAR_HOST
+                        '''
+                    }
+                }
+            }
+        }
         stage('Docker Build & Push') {
             when { expression { params.BUILD_DOCKER_IMAGE || params.PUSH_DOCKER_IMAGE } }
             steps {
