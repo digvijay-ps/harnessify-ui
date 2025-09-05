@@ -1,4 +1,8 @@
-@Library('ci-pipeline-lib') _
+library identifier: 'ci-pipeline-lib@main', retriever: modernSCM([
+    $class: 'GitSCMSource',
+    remote: 'https://github.com/digvijay-ps/harnessify-ui.git',
+    credentialsId: 'github-digvijay-pat'
+])
 
 pipeline {
     agent none
