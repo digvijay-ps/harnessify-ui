@@ -1,6 +1,6 @@
 library identifier: 'ci-pipeline-lib@main', retriever: modernSCM([
     $class: 'GitSCMSource',
-    remote: 'https://github.com/digvijay-ps/harnessify-ui.git',
+    remote: 'https://github.com/digvijay-ps/example-repo.git',
     credentialsId: 'github-digvijay-pat'
 ])
 
@@ -16,8 +16,8 @@ pipeline {
             agent dindPodTemplate()
             steps {
                 checkoutGitBranch(params.GIT_BRANCH,
-                                  'https://dig1@pscode.lioncloud.net/CloudDevOps/gen-ai-agents/harness-migration-agent.git',
-                                  'pscode-digvijay-pat')
+                                  'https://github.com/digvijay-ps/harnessify-ui.git',
+                                  'github-digvijay-pat')
             }
         }
 
