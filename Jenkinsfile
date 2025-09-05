@@ -1,6 +1,6 @@
 library identifier: 'ci-pipeline-lib@main', retriever: modernSCM([
     $class: 'GitSCMSource',
-    remote: 'https://github.com/digvijay-ps/example-repo.git',
+    remote: 'https://github.com/digvijay-ps/ci-pipeline-lib.git',
     credentialsId: 'github-digvijay-pat'
 ])
 pipeline {
